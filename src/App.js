@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState } from 'react'
+import Modal from './components/Modal'
+import Button from './components/Button'
+import { GlobalStyles } from './global-styles/GlobalStyles'
 
-function App() {
+const App = () => {
+  const [mountModal, setMountModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+
+  const handleOpenModal = () => {
+    setMountModal(true)
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setTimeout(() => setMountModal(false), 350)
+    setShowModal(false)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Fragment>
+      <GlobalStyles />
+      <div className="center-app">
+        <Button
+          onClick={handleOpenModal}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          abrir modal
+      </Button>
+        <Modal
+          mountModal={mountModal}
+          showModal={showModal}
+          handleCloseModal={handleCloseModal}
+        />
+      </div>
+    </Fragment>
+  )
 }
 
-export default App;
+export default App
